@@ -37,10 +37,10 @@ print("*************************************************************************
 print("**************************************************************************")
 
 print("")
-print("Starting system...")
+print("Starting system ...")
 
 print("")
-print("Loading Google Translator engine...")
+print("Loading Google Translator engine ...")
 
 print("")
 print("")
@@ -48,14 +48,14 @@ print("*************************************************************************
 print("YARP configuration:")
 print("**************************************************************************")
 print("")
-print("Initializing YARP network...")
+print("Initializing YARP network ...")
 
 # Init YARP Network
 yarp.Network.init()
 
 
 print("")
-print("Opening data input port with name /googleTranslatorEngine/data:i ...")
+print("[INFO] Opening data input port with name /googleTranslatorEngine/data:i ...")
 
 # Open input data port
 googleTranslatorEngine_inputPort = yarp.Port()
@@ -66,7 +66,7 @@ googleTranslatorEngine_inputPort.open(googleTranslatorEngine_inputPortName)
 inputBottle=yarp.Bottle()
 
 print("")
-print("Opening data output port with name /googleTranslatorEngine/data:o ...")
+print("[INFO] Opening data output port with name /googleTranslatorEngine/data:o ...")
 
 # Open output data port
 googleTranslatorEngine_outputPort = yarp.Port()
@@ -78,11 +78,11 @@ outputBottle=yarp.Bottle()
 
 
 print("")
-print("Initializing googleTranslator engine...")
+print("Initializing googleTranslator engine ...")
 
 # Get system configuration
 print("")
-print("Detecting system and release version...")
+print("Detecting system and release version ...")
 systemPlatform = platform.system()
 systemRelease = platform.release()
 
@@ -124,12 +124,11 @@ while int(loopControlIniExist)==0:
         print("**************************************************************************")
         # File not exist
         print("")
-        print("Error, languages.ini not founded, i will check again in 4 seconds ...")
-        print("Waiting 4 seconds to next check ...")
+        print("[ERROR] Error, languages.ini not founded, i will check again in 4 seconds ...")
         print("")
         time.sleep(4)
 
-print("Data obtained correctly.")
+print("[INFO] Data obtained correctly.")
 print("")
 print("Input language: "+ str(inputLanguage))
 print("Output language: "+ str(outputLanguage))
@@ -144,7 +143,7 @@ print("Configuring Google Translator client ...")
 
 googleTranslatorEngineClient = Translator()
 
-print("Client configuration done.")
+print("[INFO] Client configuration done.")
 
 
 while True:
@@ -157,7 +156,7 @@ while True:
     dataToTranslate = inputBottle.toString()
     dataToTranslate = dataToTranslate.replace('"','')
 
-    print("Data received: "+str(dataToTranslate))
+    print("[RECEIVED] Data received: "+str(dataToTranslate))
 
     print("")
     print("")
@@ -171,12 +170,12 @@ while True:
         print("Connecting with Google Translator server ...")
 
         print("")
-        print("Translating from "+str(inputLanguage)+ " to "+ str(outputLanguage)+" ...")
+        print("[INFO] Translating from "+str(inputLanguage)+ " to "+ str(outputLanguage)+" ...")
 
         dataTranslated = googleTranslatorEngineClient.translate(str(dataToTranslate),dest=str(outputLanguage), src=str(inputLanguage))
         dataTranslated = dataTranslated.text
         print("")
-        print("Text translated.")
+        print("[INFO] Text translated.")
 
         print("")
         print("Server response done.")
@@ -187,13 +186,13 @@ while True:
         print("Results:")
         print("**************************************************************************")
         print("")
-        print("Input text in "+str(inputLanguage)+" language: "+ str(dataToTranslate))
+        print("[RESULTS] Input text in "+str(inputLanguage)+" language: "+ str(dataToTranslate))
         print("")
-        print("Output text in "+str(outputLanguage)+" language: "+ str(dataTranslated))
+        print("[RESULTS] Output text in "+str(outputLanguage)+" language: "+ str(dataTranslated))
 
     except:
         print("")
-        print("Sorry, i could´t resolve your request.")
+        print("[ERROR] Sorry, i could´t resolve your request.")
 
 
     # Send output results
