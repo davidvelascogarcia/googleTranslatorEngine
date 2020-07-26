@@ -12,7 +12,7 @@ os: linux
 
 # Distribución del sistema operativo
 
-dist: trusty
+dist: xenial
 
 # Requerimiento de permisos en Linux
 
