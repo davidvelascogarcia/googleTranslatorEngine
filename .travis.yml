@@ -61,8 +61,8 @@ install:
 before_script:
 
   # Instalar dependencias
-  - sudo pip install googletrans
-  - sudo pip install configparser
+  - sudo pip3 install googletrans
+  - sudo pip3 install configparser
 
   - cd programs
 
